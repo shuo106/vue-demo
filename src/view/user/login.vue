@@ -1,28 +1,25 @@
 <template>
-  <div class="login-container">
-    <head-top></head-top>
-    <from class="login-form">
+  <div id="login">
+    <top></top>
+    <form class="form-container">
       <section class="form-field">
-        <label>用户名</label>
-        <input v-model="username" placeholder="请输入用户名" @blur="checkUser"/>
+        <label>用户名<span></span></label>
+        <input v-model="username" placeholder="请输入用户名" @blur="checkUser" autofocus/>
       </section>
       <section class="form-field">
         <label>密码</label>
         <input v-model="password" placeholder="请输入密码" @blur="checkUser"/>
       </section>
-      <div class="form-submit">
-        <div class="btn" @click="submit">登录</div>
-      </div>
-    </from>
+      <div class="form-submit" @click="submit">登录</div>
+    </form>
   </div>
 </template>
 
 <script>
-  import headTop from '../../components/head'
+  import top from '../../components/head'
   import {Toast} from 'mint-ui'
   export default {
-    name: 'login',
-    components: {headTop},
+    components: {top},
     data () {
       return {
         username: null, // 用户名
@@ -31,7 +28,15 @@
     },
     methods: {
       submit () {
-        console.log(this.username + '/' + this.password)
+        let param = {
+          name: this.username,
+          password: this.password
+        }
+        this.$http.post('user/login', param).then(res => {
+          if (parseInt(res.body.status) === 200) {
+            this.$route.push('/')
+          }
+        })
       },
       checkUser () {
         let param = {
@@ -51,38 +56,32 @@
 
 <style lang="less" scoped>
   @import url('../../assets/css/common.less');
-  .login-form {
-    width: 90%;
+  .form-container {
     .form-field {
+      width: 100%;
       line-height: 1.07rem;
       display: flex;
       // justify-content: space-between;
       font-size: 16px;
-      // border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
       label {
-        margin-left: 0.53rem;
         width: 30%;
+        text-align: justify;
       }
       input {
         border: none;
-        width: 60%;
+        width: 70%;
       }
     }
     .form-submit {
-      display: flex;
-      justify-content: center;
-      .btn {
-        width: 90%;
-        background-color: @primary;
-        display: flex;
-        justify-content: center;
-        line-height: 1.07rem;
-        font-size: 20px;
-        color: #333;
-        letter-spacing: 4px;
-        border-radius: 2px;
-      }
-      
+      width: 100%;
+      line-height: 1.07rem;
+      margin: 0.8rem auto;
+      font-size: 20px;
+      text-align: center;
+      color: #333;
+      background-color: @primary;
+      border-radius: 2px;
     }
   }
 </style>

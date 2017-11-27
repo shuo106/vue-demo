@@ -1,15 +1,15 @@
 <template>
-  <div id="head_top">
-    <div class="fixed_head">
-      <div class="head_goback" v-if="goback" @click="$router.go(-1)">
+  <div id="top">
+    <div class="fixed-head">
+      <div class="head-goback" v-if="goback" @click="$router.go(-1)">
         <img src="../assets/img/icon/back.png">
       </div>
       <div class="btn">
-        <router-link to='/login'>
-          <span class="login_span">注册|</span>
+        <router-link to='/register'>
+          <span class="login-span">注册|</span>
         </router-link>
         <router-link to='/login'>
-          <span class="login_span">登陆</span>
+          <span class="login-span">登陆</span>
         </router-link>
       </div>
     </div>
@@ -33,11 +33,12 @@
 
 <style lang="less" scoped>
   @import url("../assets/css/common.less");
-  #head_top {
+  #top {
     width: 100%;
-    height: 1.07rem;
     // padding-right: 0.13rem;
-    .fixed_head {
+    height: 0.93rem;
+    .fixed-head {
+      height: 0.93rem;
       background-color: @blue;
       position: fixed;
       z-index: 100;
@@ -54,15 +55,14 @@
       }
       .btn {
         padding-right: 0.21rem;
-        .login_span {
+        .login-span {
           font-size: 16px;
           letter-spacing: 2px;
         }
       }
     }
     .divider {
-      width: 100px;
-      // height: 1.07rem;
+      // width: 100px;
     }
   }
 </style>

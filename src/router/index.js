@@ -1,28 +1,33 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import App from '../App'
-import HelloWorld from '@/components/HelloWorld'
-import Login from '@/view/login/login'
+import Home from '@/view/home/home'
+import Login from '@/view/user/login'
+import Register from '@/view/user/register'
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'App',
       component: App,
       children: [
         {
           path: '',
-          redirect: '/helloworld'
+          redirect: '/home'
         },
         {
-          path: '/helloworld',
-          component: HelloWorld
+          path: '/home',
+          component: Home
         },
         {
           path: '/login',
           component: Login
+        },
+        {
+          path: '/register',
+          component: Register
         }
       ]
     }
